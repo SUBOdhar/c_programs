@@ -1,27 +1,45 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
+#include <Windows.h>
+
+#ifndef MAX_PATH
+#define MAX_PATH 260
+#endif
+
+bool ext_check(const char *filename)
+{
+    const char *dot = strrchr(filename, '.');
+    return (dot && strcmp(dot + 1, "darus") == 0);
+}
+
+char *tmp_darus()
+{
+    static char temp_path[MAX_PATH];
+    char fld[] = "\\darus\\";
+    GetTempPath(MAX_PATH, temp_path);
+    strcat(temp_path, fld);
+    CreateDirectory(temp_path, NULL);
+    return temp_path;
+}
 
 int main(int argc, char *argv[])
 {
     FILE *fil;
 
-    // Check if a filename is provided as an argument
     if (argc < 2)
     {
         printf("Usage: %s filename\n", argv[0]);
         return 1;
     }
 
-    // Check if the file has the correct extension
-    const char *dot = strrchr(argv[1], '.');
-    if (!(dot && strcmp(dot + 1, "darus") == 0))
+    if (!ext_check(argv[1]))
     {
         printf("File extension does not match '.darus'\n");
         return 1;
     }
 
-    // Open the file
     fil = fopen(argv[1], "r");
     if (fil == NULL)
     {
@@ -36,11 +54,15 @@ int main(int argc, char *argv[])
     char initialStr[] = "#include <darus.h>\nint main(){\n";
     char str2[] = "}";
     char dataFromFile[10000];
+    char flpth[MAX_PATH] = "";
+    strcat(flpth, "runner.c");
+
+    strcat(flpth, tmp_darus());
 
     filePointer = fopen(argv[1], "r");
-    outputFile = fopen("temp/runner.c", "w");
+    outputFile = fopen(flpth, "w");
 
-    if (filePointer == NULL || outputFile == NULL)
+    if (filePointer == NULL)
     {
         printf("Error: Unable to open files.\n");
         return 1;
@@ -79,8 +101,11 @@ int main(int argc, char *argv[])
 
     free(str1);
 
-    // Compile the outputFile
-    int compileStatus = system("gcc temp/runner.c -o temp/output");
+    char cmmd[MAX_PATH + 30] = "gcc ";
+    strcat(cmmd, "\"");
+    strcat(cmmd, flpth);
+    strcat(cmmd, "\" -o output");
+    int compileStatus = system(cmmd);
 
     if (compileStatus != 0)
     {
