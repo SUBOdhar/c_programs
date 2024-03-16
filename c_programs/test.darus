@@ -1,3 +1,4 @@
- char *a;
-a=input("enter your name");
-print("your name");
+char *a;
+a=input("enter your name: ");
+print("your name is ");
+print(a);

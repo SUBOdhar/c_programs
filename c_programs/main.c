@@ -7,7 +7,23 @@
 #ifndef MAX_PATH
 #define MAX_PATH 260
 #endif
+char *get_flnm(const char *filename)
+{
+    char *result = strdup(filename); // Make a copy of the filename
+    if (result == NULL)
+    {
+        // Memory allocation failed
+        return NULL;
+    }
 
+    char *dot = strrchr(result, '.'); // Find last occurrence of '.'
+    if (dot && dot != result)
+    {                // Ensure dot exists and is not the first character
+        *dot = '\0'; // Replace dot with null character
+    }
+
+    return result;
+}
 bool ext_check(const char *filename)
 {
     const char *dot = strrchr(filename, '.');
@@ -17,7 +33,7 @@ bool ext_check(const char *filename)
 char *tmp_darus()
 {
     static char temp_path[MAX_PATH];
-    char fld[] = "\\darus\\";
+    char fld[] = "darus";
     GetTempPath(MAX_PATH, temp_path);
     strcat(temp_path, fld);
     CreateDirectory(temp_path, NULL);
@@ -27,7 +43,6 @@ char *tmp_darus()
 int main(int argc, char *argv[])
 {
     FILE *fil;
-
     if (argc < 2)
     {
         printf("Usage: %s filename\n", argv[0]);
@@ -47,7 +62,8 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    printf("Processing...\n");
+    printf("Processing %s ...\n", argv[1]);
+    char *flnm = get_flnm(argv[1]);
 
     FILE *filePointer;
     FILE *outputFile;
@@ -55,9 +71,10 @@ int main(int argc, char *argv[])
     char str2[] = "}";
     char dataFromFile[10000];
     char flpth[MAX_PATH] = "";
-    strcat(flpth, "runner.c");
 
     strcat(flpth, tmp_darus());
+    strcat(flpth, "\\");
+    strcat(flpth, "runner.c");
 
     filePointer = fopen(argv[1], "r");
     outputFile = fopen(flpth, "w");
@@ -104,9 +121,10 @@ int main(int argc, char *argv[])
     char cmmd[MAX_PATH + 30] = "gcc ";
     strcat(cmmd, "\"");
     strcat(cmmd, flpth);
-    strcat(cmmd, "\" -o output");
-    int compileStatus = system(cmmd);
+    strcat(cmmd, "\" -o ");
 
+    strcat(cmmd, flnm);
+    int compileStatus = system(cmmd);
     if (compileStatus != 0)
     {
         printf("Error: Compilation failed.\n");
@@ -115,7 +133,6 @@ int main(int argc, char *argv[])
     else
     {
         printf("Compilation successful.\n");
-        printf("Compiled file location: temp/output.exe\n");
     }
 
     fclose(fil);
