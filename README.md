@@ -15,9 +15,6 @@ Darus is a simple compiler written in C that is designed to compile programs wri
 2. [Getting Started](#getting-started)
    - [Prerequisites](#prerequisites)
    - [Installation](#installation)
-3. [Usage](#usage)
-4. [Contributing](#contributing)
-5. [License](#license)
 
 ## Features
 
