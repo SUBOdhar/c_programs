@@ -32,8 +32,8 @@ To build and use the Darus compiler, you need the following:
 
 ### Installation
 
-1. Clone this repository:
+1. Clone the compiler:
 
    ```sh
-   git clone https://github.com/SUBOdhar/c_programs.git
+   git clone https://github.com/SUBOdhar/c_programs/tree/c9218a07c6dca52b4dadee728088b52b2c9a9c7e/compiler
    ```
