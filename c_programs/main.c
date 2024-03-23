@@ -1,3 +1,11 @@
+
+// ██████╗░░█████╗░██████╗░██╗░░░██╗░██████╗
+//██╔══██╗██╔══██╗██╔══██╗██║░░░██║██╔════╝
+//██║░░██║███████║██████╔╝██║░░░██║╚█████╗░
+//██║░░██║██╔══██║██╔══██╗██║░░░██║░╚═══██╗
+//██████╔╝██║░░██║██║░░██║╚██████╔╝██████╔╝
+//╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝░╚═════╝░╚═════╝░
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -8,8 +16,9 @@
 #define MAX_PATH 260
 #endif
 
-// Gets the file name from the the file path argument
-char *get_flnm(const char *filename)
+    // Gets the file name from the the file path argument
+    char *
+    get_flnm(const char *filename)
 {
     char *result = strdup(filename); // Make a copy of the filename
     if (result == NULL)
