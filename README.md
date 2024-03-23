@@ -10,6 +10,7 @@
 Darus is a simple compiler written in C that is designed to compile programs written in the Darus programming language.
 
 ## Table of Contents
+
 1. [Features](#features)
 2. [Getting Started](#getting-started)
    - [Prerequisites](#prerequisites)
@@ -37,4 +38,5 @@ To build and use the Darus compiler, you need the following:
 1. Clone this repository:
 
    ```sh
-   git clone https://github.com/your_username/darus-compiler.git
+   git clone https://github.com/SUBOdhar/c_programs.git
+   ```
