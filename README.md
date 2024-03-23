@@ -28,7 +28,6 @@ Darus is a simple compiler written in C that is designed to compile programs wri
 To build and use the Darus compiler, you need the following:
 
 - C compiler (e.g., GCC)
-- Make utility
 
 ### Installation
 
