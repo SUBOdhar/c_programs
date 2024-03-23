@@ -5,9 +5,36 @@
 ██████╔╝██║░░██║██║░░██║╚██████╔╝██████╔╝
 ╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝░╚═════╝░╚═════╝░
 
+# Darus Compiler
 
-## Here different c programs are
+Darus is a simple compiler written in C that is designed to compile programs written in the Darus programming language.
 
-### File under the dir /compiler/include/darus.h is respinsible for adding new function
+## Table of Contents
+1. [Features](#features)
+2. [Getting Started](#getting-started)
+   - [Prerequisites](#prerequisites)
+   - [Installation](#installation)
+3. [Usage](#usage)
+4. [Contributing](#contributing)
+5. [License](#license)
 
-### main.c IS the main compiler of the darus program it is located inside the c_program dir
+## Features
+
+- Parses and compiles programs written in the Darus programming language.
+- Generates executable files from Darus source code.
+
+## Getting Started
+
+### Prerequisites
+
+To build and use the Darus compiler, you need the following:
+
+- C compiler (e.g., GCC)
+- Make utility
+
+### Installation
+
+1. Clone this repository:
+
+   ```sh
+   git clone https://github.com/your_username/darus-compiler.git
