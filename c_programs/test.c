@@ -1,4 +1,3 @@
-#include <stdbool.h>
 #include <string.h>
 #include <stdio.h>
 
@@ -10,7 +9,7 @@ char *ext_check(const char *filename)
 int main(int argc, char *argv[]) // argc is the argumnet counter and the argv is the argumnet passed which is an array
 {
     FILE *addas;
-    FILE *fil; // temp file opener pointer
+    FILE *fildas; // temp file opener pointer
 
     if (ext_check(argv[1]) == NULL)
     {
@@ -21,9 +20,9 @@ int main(int argc, char *argv[]) // argc is the argumnet counter and the argv is
                 char nasd[25] = "";
                 strcat(nasd, argv[2]);
                 strcat(nasd, ".drs");
-                fil = fopen(nasd, "r"); // opens the argumnet file
+                fildas = fopen(nasd, "r"); // opens the argumnet file
 
-                if (fil == NULL)
+                if (fildas == NULL)
                 {
 
                     addas = fopen(nasd, "w");
@@ -39,9 +38,9 @@ int main(int argc, char *argv[]) // argc is the argumnet counter and the argv is
             }
             else if (strcmp(ext_check(argv[2]), ".drs") == 0)
             {
-                fil = fopen(argv[2], "r"); // opens the argumnet file
+                fildas = fopen(argv[2], "r"); // opens the argumnet file
 
-                if (fil == NULL)
+                if (fildas == NULL)
                 {
                     addas = fopen(argv[2], "w");
                     fputs("//WELCOME TO DARUS", addas);
