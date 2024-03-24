@@ -5,6 +5,7 @@
 //  ██║░░██║██╔══██║██╔══██╗██║░░░██║░╚═══██╗
 //  ██████╔╝██║░░██║██║░░██║╚██████╔╝██████╔╝
 //  ╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝░╚═════╝░╚═════╝░
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -15,9 +16,9 @@
 #define MAX_PATH 260
 #endif
 
-    // Gets the file name from the the file path argument
-    char *
-    get_flnm(const char *filename)
+// Gets the file name from the the file path argument
+char *
+get_flnm(const char *filename)
 {
     char *result = strdup(filename); // Make a copy of the filename
     if (result == NULL)
@@ -35,12 +36,12 @@
     return result;
 }
 
-// Checks the the file argument extension as .darsu or not
+// Checks the the file argument extension as .drs or not
 
-bool ext_check(const char *filename)
+bool ext_check_drs(const char *filename)
 {
     const char *dot = strrchr(filename, '.');
-    return (dot && strcmp(dot + 1, "darus") == 0);
+    return (dot && strcmp(dot + 1, "drs") == 0);
 }
 
 // Get the TEMP directory of the system and creates a folder named darus for temporary data storage
@@ -67,21 +68,21 @@ int main(int argc, char *argv[]) // argc is the argumnet counter and the argv is
         return 1;
     }
 
-    if (!ext_check(argv[1]))
+    if (!ext_check_drs(argv[1]))
     {
-        printf("File extension does not match '.darus'\n");
+        printf("File extension does not match '.drs'\n");
         return 1;
     }
 
     fil = fopen(argv[1], "r"); // opens the argumnet file
-    if (fil == NULL)           // checks whether the gigen argument file exists
+    if (fil == NULL)           // checks whether the given argument file exists
     {
         printf("Error: Unable to open file '%s'\n", argv[1]);
         return 1;
     }
 
     printf("Processing %s ...\n", argv[1]); // some processing output
-    char *flnm = get_flnm(argv[1]);         // getting the fiel name of the argument file
+    char *flnm = get_flnm(argv[1]);         // getting the file name of the argument file
 
     FILE *filePointer;
     FILE *outputFile;
@@ -94,7 +95,7 @@ int main(int argc, char *argv[]) // argc is the argumnet counter and the argv is
     strcat(flpth, "\\");        // adds a \ between the file path and file name
     strcat(flpth, "runner.c");  // combines the file name with the file path
 
-    filePointer = fopen(argv[1], "r"); // Opens the .darus file and reads it
+    filePointer = fopen(argv[1], "r"); // Opens the .drs file and reads it
     outputFile = fopen(flpth, "w");    // opens the output file which is stored in temporary folder and writes the modified data from .darus file
 
     if (filePointer == NULL)
