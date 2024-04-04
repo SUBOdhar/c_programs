@@ -1,6 +1,5 @@
-//simple example of a drs file 
-
-char *a;
-a=input("enter your name: ");
-print("your name is ");
-print(a);
+import "sbd.drs";
+import "smd.drs";
+import "ssd.drs";
+import "sfd.drs";
+import "snd.drs";

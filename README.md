@@ -35,4 +35,3 @@ To build and use the Darus compiler, you need the following:
 
    ```sh
    git clone https://github.com/SUBOdhar/darus_compiler/tree/131f5ca4dc45c38333c59d78bce717198a90886c/compiler
-   ```

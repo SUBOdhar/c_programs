@@ -15,3 +15,7 @@ char *print(char *prompt)
 {
     printf("%s", prompt);
 }
+char *text(char *prompt)
+{
+    printf("%s", prompt);
+}

@@ -5,6 +5,7 @@
 #include <Windows.h>
 
 #define MAX_FILENAME_LENGTH 1000
+#define MAX_FILE_PATH_LENGTH 100
 
 // Function prototypes
 char *tmp_darus();
@@ -57,6 +58,7 @@ int main(int argc, char *argv[])
         }
         else
         {
+
             compile_file(argv[i]);
         }
     }
@@ -110,7 +112,7 @@ void compile_file(const char *filename)
 
     FILE *source_file = fopen(filename, "r");
     FILE *output_file = fopen(tmp_file_path, "w");
-
+    import_Data_adder(filename, tmp_file_path);
     if (source_file == NULL || output_file == NULL)
     {
         printf("Error: Unable to open files.\n");
@@ -145,4 +147,94 @@ void compile_file(const char *filename)
     }
 
     free(file_name_without_ext);
+}
+
+// Function to check if a word is "import"
+bool isImport(const char *word)
+{
+    return strcmp(word, "import") == 0;
+}
+
+// Function to remove the leading and trailing double quotes and semicolon from a string
+void removeQuotesAndSemicolon(char *str)
+{
+    int len = strlen(str);
+    if (len >= 3 && str[0] == '"' && str[len - 2] == '"' && str[len - 1] == ';')
+    {
+        memmove(str, str + 1, len - 3);
+        str[len - 3] = '\0';
+    }
+}
+
+// Function to get the file paths after the 'import' keyword in a file
+char **getImportFilePaths(const char *filename, int *numPaths)
+{
+    FILE *file = fopen(filename, "r");
+    if (file == NULL)
+    {
+        printf("Error opening file.\n");
+        return NULL;
+    }
+
+    char line[MAX_FILE_PATH_LENGTH];
+    char **paths = NULL;
+    *numPaths = 0;
+
+    while (fgets(line, sizeof(line), file) != NULL)
+    {
+        char *token = strtok(line, " \t\n\"");
+        while (token != NULL)
+        {
+            if (isImport(token))
+            {
+                token = strtok(NULL, " \t\n\"");
+                if (token != NULL)
+                {
+                    removeQuotesAndSemicolon(token);
+                    paths = realloc(paths, (*numPaths + 1) * sizeof(char *));
+                    if (paths == NULL)
+                    {
+                        printf("Memory allocation failed.\n");
+                        fclose(file);
+                        return NULL;
+                    }
+                    paths[*numPaths] = strdup(token);
+                    (*numPaths)++;
+                    break;
+                }
+            }
+            token = strtok(NULL, " \t\n\"");
+        }
+    }
+
+    fclose(file);
+    return paths;
+}
+char import_Data_adder(file_imo, tmp_file)
+{
+    int numPaths;
+    char **paths = getImportFilePaths(file_imo, &numPaths);
+    FILE *imps;
+    FILE *addins;
+    if (paths != NULL)
+    {
+        for (int i = 0; i < numPaths; i++)
+        {
+            paths[i];
+            imps = fopen(paths[i], "r");
+            free(paths[i]);
+            if (imps == NULL)
+            {
+                printf("file import doesnot exists %c", paths[i]);
+            }
+            imps = fopen(file_imo, "w");
+            addins = fopen(tmp_file, "w");
+            char buffer[10000];
+            while (fgets(buffer, sizeof(buffer), imps) != NULL)
+            {
+                fputs(buffer, addins);
+            }
+        }
+        free(paths);
+    }
 }
